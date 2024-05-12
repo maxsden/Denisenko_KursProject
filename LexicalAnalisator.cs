@@ -21,6 +21,8 @@ namespace Denisenko_KursProject
 
         public LexicalAnalisator(string text1) //Конструктор
         {
+            LexemList.Clear();
+            errorsList.Clear();
             string word = "";
             text = text1;
             char symbol;
@@ -177,7 +179,7 @@ namespace Denisenko_KursProject
                 LexemList.Add(new Lexem("-", Lexem.ClassLexem.UnarOp, currentRow));
                 LexemList.Add(new Lexem(inp.Substring(1), Lexem.ClassLexem.Const, currentRow));
             }
-            else if (inp.ToLower() == "integer" || inp.ToLower() == "begin" || inp.ToLower() == "end" || inp.ToLower() == "if" || inp.ToLower() == "else" || inp.ToLower() == "while") //Добавляем ключевые слова
+            else if (inp.ToLower() == "integer" || inp.ToLower() == "var" || inp.ToLower() == "begin" || inp.ToLower() == "end" || inp.ToLower() == "if" || inp.ToLower() == "else" || inp.ToLower() == "endif" || inp.ToLower() == "while" || inp.ToLower() == "endwhile") //Добавляем ключевые слова
             {
                 if (inp.ToLower() == "begin")
                     LexemList.Add(new Lexem(inp, Lexem.ClassLexem.Keyword, currentRow - 1));
@@ -200,7 +202,7 @@ namespace Denisenko_KursProject
             }
             else if (inp == ">" || inp == "<" || inp == ">=" || inp == "<=" || inp =="=") //Добавляем логические операторы
             {
-                LexemList.Add(new Lexem(inp, Lexem.ClassLexem.BinarOp, currentRow));
+                LexemList.Add(new Lexem(inp, Lexem.ClassLexem.BoolOp, currentRow));
             }
             else if (inp == ":=") //Добавляем оператор присваивания
             {

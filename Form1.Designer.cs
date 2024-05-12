@@ -41,6 +41,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.errorsClearButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +50,7 @@
             // 
             this.loadCodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.loadCodeButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.loadCodeButton.Location = new System.Drawing.Point(746, 23);
+            this.loadCodeButton.Location = new System.Drawing.Point(866, 23);
             this.loadCodeButton.Name = "loadCodeButton";
             this.loadCodeButton.Size = new System.Drawing.Size(232, 87);
             this.loadCodeButton.TabIndex = 1;
@@ -61,18 +62,19 @@
             // 
             this.saveCodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveCodeButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.saveCodeButton.Location = new System.Drawing.Point(746, 126);
+            this.saveCodeButton.Location = new System.Drawing.Point(866, 126);
             this.saveCodeButton.Name = "saveCodeButton";
             this.saveCodeButton.Size = new System.Drawing.Size(232, 87);
             this.saveCodeButton.TabIndex = 1;
             this.saveCodeButton.Text = "Сохранить код\r\nв файл";
             this.saveCodeButton.UseVisualStyleBackColor = true;
+            this.saveCodeButton.Click += new System.EventHandler(this.saveCodeButton_Click);
             // 
             // saveLexemButton
             // 
             this.saveLexemButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveLexemButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.saveLexemButton.Location = new System.Drawing.Point(746, 249);
+            this.saveLexemButton.Location = new System.Drawing.Point(866, 249);
             this.saveLexemButton.Name = "saveLexemButton";
             this.saveLexemButton.Size = new System.Drawing.Size(232, 87);
             this.saveLexemButton.TabIndex = 1;
@@ -84,7 +86,7 @@
             // 
             this.savePostfixButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.savePostfixButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.savePostfixButton.Location = new System.Drawing.Point(746, 351);
+            this.savePostfixButton.Location = new System.Drawing.Point(866, 351);
             this.savePostfixButton.Name = "savePostfixButton";
             this.savePostfixButton.Size = new System.Drawing.Size(232, 87);
             this.savePostfixButton.TabIndex = 1;
@@ -96,7 +98,7 @@
             // 
             this.saveMnemocodeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.saveMnemocodeButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.saveMnemocodeButton.Location = new System.Drawing.Point(746, 455);
+            this.saveMnemocodeButton.Location = new System.Drawing.Point(866, 455);
             this.saveMnemocodeButton.Name = "saveMnemocodeButton";
             this.saveMnemocodeButton.Size = new System.Drawing.Size(232, 87);
             this.saveMnemocodeButton.TabIndex = 1;
@@ -109,11 +111,11 @@
             this.clearTextBoxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.clearTextBoxButton.BackColor = System.Drawing.Color.RosyBrown;
             this.clearTextBoxButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.clearTextBoxButton.Location = new System.Drawing.Point(746, 619);
+            this.clearTextBoxButton.Location = new System.Drawing.Point(866, 583);
             this.clearTextBoxButton.Name = "clearTextBoxButton";
             this.clearTextBoxButton.Size = new System.Drawing.Size(232, 42);
             this.clearTextBoxButton.TabIndex = 1;
-            this.clearTextBoxButton.Text = "Очистить";
+            this.clearTextBoxButton.Text = "Очистить всё";
             this.clearTextBoxButton.UseVisualStyleBackColor = false;
             this.clearTextBoxButton.Click += new System.EventHandler(this.clearTextBoxButton_Click);
             // 
@@ -126,7 +128,7 @@
             this.errorView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.errorView.Location = new System.Drawing.Point(3, 23);
             this.errorView.Name = "errorView";
-            this.errorView.Size = new System.Drawing.Size(985, 200);
+            this.errorView.Size = new System.Drawing.Size(1105, 200);
             this.errorView.TabIndex = 2;
             this.errorView.UseCompatibleStateImageBehavior = false;
             this.errorView.View = System.Windows.Forms.View.Details;
@@ -155,7 +157,7 @@
             this.groupBox1.Location = new System.Drawing.Point(21, 715);
             this.groupBox1.MaximumSize = new System.Drawing.Size(1800, 400);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(991, 226);
+            this.groupBox1.Size = new System.Drawing.Size(1111, 226);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ошибки";
@@ -168,7 +170,7 @@
             this.richTextBox1.MaximumSize = new System.Drawing.Size(1600, 1200);
             this.richTextBox1.MinimumSize = new System.Drawing.Size(661, 649);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(710, 671);
+            this.richTextBox1.Size = new System.Drawing.Size(830, 671);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -183,15 +185,29 @@
             this.panel1.MaximumSize = new System.Drawing.Size(1600, 900);
             this.panel1.MinimumSize = new System.Drawing.Size(700, 650);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(710, 671);
+            this.panel1.Size = new System.Drawing.Size(830, 671);
             this.panel1.TabIndex = 4;
+            // 
+            // errorsClearButton
+            // 
+            this.errorsClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.errorsClearButton.BackColor = System.Drawing.Color.RosyBrown;
+            this.errorsClearButton.Font = new System.Drawing.Font("Times New Roman", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.errorsClearButton.Location = new System.Drawing.Point(866, 631);
+            this.errorsClearButton.Name = "errorsClearButton";
+            this.errorsClearButton.Size = new System.Drawing.Size(232, 42);
+            this.errorsClearButton.TabIndex = 1;
+            this.errorsClearButton.Text = "Очистить ошибки";
+            this.errorsClearButton.UseVisualStyleBackColor = false;
+            this.errorsClearButton.Click += new System.EventHandler(this.errorsClearButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1062, 953);
+            this.ClientSize = new System.Drawing.Size(1182, 953);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.errorsClearButton);
             this.Controls.Add(this.clearTextBoxButton);
             this.Controls.Add(this.saveMnemocodeButton);
             this.Controls.Add(this.savePostfixButton);
@@ -199,6 +215,7 @@
             this.Controls.Add(this.saveCodeButton);
             this.Controls.Add(this.loadCodeButton);
             this.Controls.Add(this.panel1);
+            this.MinimumSize = new System.Drawing.Size(1100, 1000);
             this.Name = "Form1";
             this.Text = "Компилятор";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -224,5 +241,6 @@
         private GroupBox groupBox1;
         private RichTextBox richTextBox1;
         private Panel panel1;
+        private Button errorsClearButton;
     }
 }

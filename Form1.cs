@@ -1,3 +1,5 @@
+using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -59,6 +61,10 @@ namespace Denisenko_KursProject
                 }
 
             }
+            else
+            {
+                MessageBox.Show("Обнаружены ошибки лексического анализа. Подробная информация приведена в таблице.", "Ошибка!", MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
 
             
 
@@ -103,7 +109,7 @@ namespace Denisenko_KursProject
             if (result == DialogResult.OK)
             {
                 stream = openFileDialog.OpenFile();
-            }
+            
             
             using (StreamReader sr = new StreamReader(stream))
             {
@@ -127,27 +133,32 @@ namespace Denisenko_KursProject
 
             }
 
-            if (errorView.Items.Count == 0)
-            {
-                PostfixGenerator postfixGenerator = new PostfixGenerator(syntaxAnalisator.LexemList);
-                FolderBrowserDialog folderBrowserDialog = new();
-                var result1 = folderBrowserDialog.ShowDialog();
-                string path = "";
-                if (result1 == DialogResult.OK)
+                if (errorView.Items.Count == 0)
                 {
-                    path = folderBrowserDialog.SelectedPath += "\\lexem_postfix.txt";
-                    using (StreamWriter sw = new StreamWriter(path))
+                    PostfixGenerator postfixGenerator = new PostfixGenerator(syntaxAnalisator.LexemList);
+                    FolderBrowserDialog folderBrowserDialog = new();
+                    var result1 = folderBrowserDialog.ShowDialog();
+                    string path = "";
+                    if (result1 == DialogResult.OK)
                     {
-                        List<string> lexems = new();
-                        lexems = postfixGenerator.GetPostfixLexemList();
-                        foreach (string str in lexems)
+                        path = folderBrowserDialog.SelectedPath += "\\lexem_postfix.txt";
+                        using (StreamWriter sw = new StreamWriter(path))
                         {
-                            sw.WriteLine(str);
+                            List<string> lexems = new();
+                            lexems = postfixGenerator.GetPostfixLexemList();
+                            foreach (string str in lexems)
+                            {
+                                sw.WriteLine(str);
+                            }
                         }
+                        MessageBox.Show($"Успешно проведена генерация постфиксного кода, результат записан в файл {path}");
+
+
                     }
-                    MessageBox.Show($"Успешно проведена генерация постфиксного кода, результат записан в файл {path}");
-
-
+                }
+                else
+                {
+                    MessageBox.Show("Возникли ошибки синтаксического анализа. Подробная информация приведена в таблице.","Ошибка!",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
             }
 
@@ -191,10 +202,53 @@ namespace Denisenko_KursProject
             }
 
             CodeGenerator codeGenerator = new CodeGenerator(text);
-            
-            
-            
+            FolderBrowserDialog folderBrowserDialog = new();
+            var result1 = folderBrowserDialog.ShowDialog();
+            string path = "";
+            if (result1 == DialogResult.OK)
+            {
+                path = folderBrowserDialog.SelectedPath += "\\generated_code.cod";
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    List<string> code = new();
+                    code = codeGenerator.result;
+                    foreach (string str in code)
+                    {
+                        sw.WriteLine(str);
+                    }
+                }
+                MessageBox.Show($"Успешно проведена генерация мнемокода, результат записан в файл {path}");
 
+
+            }
+
+
+
+        }
+
+        private void errorsClearButton_Click(object sender, EventArgs e)
+        {
+            errorView.Items.Clear();
+        }
+
+        private void saveCodeButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.DefaultExt = "txt";
+            saveFileDialog.Filter = "Текстовые файлы (*.txt)|*.txt|Все файлы (*.*)|*.*";
+
+            var result = saveFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string path = saveFileDialog.FileName;
+                using (StreamWriter sw = new StreamWriter(path))
+                {
+                    sw.Write(richTextBox1.Text);
+                }
+                MessageBox.Show($"Успешно проведено сохранение кода в файл {path}");
+                var pr = Process.Start(@"C:\Users\maxde\Desktop\VirtualMachine.exe");
+                pr.Start();
+            }
         }
     }
 }

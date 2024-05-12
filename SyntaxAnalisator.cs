@@ -39,7 +39,7 @@ namespace Denisenko_KursProject
                 try
                 {
                     SyntaxAnalis(); // Запуск синтаксического анализа
-                    MessageBox.Show("Успешно!", "Синтаксический анализ", MessageBoxButtons.OK, MessageBoxIcon.None);
+                    //MessageBox.Show("Успешно!", "Синтаксический анализ", MessageBoxButtons.OK, MessageBoxIcon.None);
 
                 }
                 catch (Exception e)
@@ -210,6 +210,7 @@ namespace Denisenko_KursProject
                 ParseAssignmentList();
                 MatchTerminal("}");
             }
+            MatchTerminal("endif");
         }
 
         private void ParseBoolExpression() //обработка логического выражения
@@ -239,6 +240,7 @@ namespace Denisenko_KursProject
             MatchTerminal("{");
             ParseAssignmentList();
             MatchTerminal("}");
+            MatchTerminal("endwhile");
         }
     }
 }

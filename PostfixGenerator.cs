@@ -37,7 +37,7 @@ namespace Denisenko_KursProject
 
             List<Lexem> lexemListRow = new List<Lexem>();
 
-            for (int row = 0; row < lexemList[lexemList.Count - 1].GetRow(); row++) //Ищем начало выражения в инфиксной форме
+            for (int row = 0; row <= lexemList[lexemList.Count - 1].GetRow(); row++) //Ищем начало выражения в инфиксной форме
             {
                 for (int i = 0; i < lexemList.Count; i++)
                 {
